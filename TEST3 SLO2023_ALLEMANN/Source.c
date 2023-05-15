@@ -9,25 +9,27 @@
 void main() {
 	const char* pt_message = TITRE;
 	const char tbMSG[] = { 0x53,0x4C,0x4F };
-	char tbMSGComplet[15] = { ' ' };
+	char tbMSGComplet[15] = { '\0' };
 	int annee = 2022;
 	int8_t version = 0x33;
-
+	int i = 6;
 	char st[5];
 
 	// titre
 	strcpy(tbMSGComplet, pt_message);
+
 	// 3
-	tbMSGComplet[4] = version;
+	strncat(tbMSGComplet, &version, 1);
+	
 	// espace
-	tbMSGComplet[5] = ' ';
+	strcat(tbMSGComplet, " ");
+
 	// SLO
-	tbMSGComplet[6] = tbMSG[0];
-	tbMSGComplet[7] = tbMSG[1];
-	tbMSGComplet[8] = tbMSG[2];
+	strncat(tbMSGComplet, tbMSG, sizeof(tbMSG) / sizeof(char));
+
 	// annee
-	itoa(annee, st, 10);
-	strcat(tbMSGComplet, st);
+	strcat(tbMSGComplet, itoa(annee, st, 10));
+
 	// printf
 	printf("%s\n", tbMSGComplet);
 
